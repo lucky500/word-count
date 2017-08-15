@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  $('.btn').click(function(e){
-    var counter = 0;
+  $('form').submit(function(e){
     e.preventDefault();
+    var counter = 0;
     var inputText = document.getElementById('one').value;
     var sentence = inputText.split(' ')
       .reduce(function(wordCount, currentWord){
@@ -9,16 +9,17 @@ $(document).ready(function(){
           wordCount[currentWord]++;
           return wordCount;
         } else {
-          wordCount[currentWord]=1;
+          wordCount[currentWord] = 1;
           return wordCount;
         }
       }, {});
-
+      
     var wordArray = [];
     for(var x in sentence){
-      $('.output ul').html('<li>' + x  +  ' ' + sentence[x] + '</li>');
-      wordArray.push(x + ": ", + sentence[x]);
+      wordArray.push('<li>' + x + ": " + sentence[x] + '</li>');
     }
-    console.log(wordArray);
+    wordArray.forEach(function(word){
+      var check = $('.output ul').html(wordArray.join(''));
+    });
   });
 });
